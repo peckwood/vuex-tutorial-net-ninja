@@ -16,3 +16,63 @@ npm run build
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+
+# Steps to integrate vuex
+
+### add vuex 3 dependency
+
+#### vuex3 is compatible with vue2
+
+```
+npm install vuex@3 --save
+```
+
+#### add `src/store/store.js`
+
+```
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
+  state: {
+    products: [
+      {name: 'Banana', price:20},
+      {name: 'Star', price:40},
+      {name: 'Green', price:60},
+      {name: 'Red', price:80},
+    ]
+  }
+})
+
+```
+
+#### main.js
+
+add
+
+```
+...
+import {store} from './store/store'
+
+new Vue({
+  store: store,
+	...
+})
+```
+
+#### access products in components
+
+```
+  computed: {
+    products(){
+      return this.$store.state.products;
+    }
+  }
+```
+
+
+

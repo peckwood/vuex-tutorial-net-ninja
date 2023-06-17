@@ -16,12 +16,6 @@ export default {
   name: 'app',
   data () {
     return {
-      products: [
-        {name: 'Banana', price:20},
-        {name: 'Star', price:40},
-        {name: 'Green', price:60},
-        {name: 'Red', price:80},
-      ]
     }
   }
 }
