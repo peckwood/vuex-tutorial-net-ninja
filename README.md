@@ -19,7 +19,7 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 
 
 
-# Steps to integrate vuex
+# vuex notes
 
 ### add vuex 3 dependency
 
@@ -64,7 +64,7 @@ new Vue({
 })
 ```
 
-#### access products in components
+### access products in components
 
 ```
   computed: {
@@ -74,5 +74,28 @@ new Vue({
   }
 ```
 
+### use getters
 
+In store.js, add getter:
+
+```
+  getters: {
+    saleProduct: state => {
+      return state.products.map(product => {
+        return {
+          name: '**' + product.name + '**',
+          price: product.price / 2
+        }
+      })
+    }
+  }
+```
+
+use getter in components:
+
+```
+    saleProducts(){
+      return this.$store.getters.saleProduct;
+    }
+```
 
