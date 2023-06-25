@@ -99,3 +99,34 @@ use getter in components:
     }
 ```
 
+### use mutations
+
+In store.js, add mutation:
+
+```
+  mutations: {
+    reducePrice: state => {
+      state.products.forEach(product =>
+        product.price -= 1
+      );
+    }
+  }
+```
+
+call mutation:
+
+```
+  methods: {
+    reducePrice(){
+      this.$store.commit('reducePrice');
+    }
+  }
+```
+
+You can set strict to true to disable direct editing, so store can only be changed using mutation
+
+direct editing vs mutation
+
+1. direct editing cannot be tracked, but mutation can.
+2. when store's strict is true, you cannot use direct editing, you can only use mutation
+
