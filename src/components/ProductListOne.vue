@@ -23,11 +23,13 @@ export default {
   },
   methods: {
     reducePrice(){
-      // not tracked like mutations
-      // can not use when store strict is true, which blocks direct editing
+      // 1. this approach is not tracked like mutations
+      // 2. can not use when store strict is true, which blocks direct editing
       // this.$store.state.products.forEach(product => product.price -= 1);
 
-      this.$store.commit('reducePrice');
+      // this.$store.commit('reducePrice');
+
+      this.$store.dispatch('reducePriceAfter2s');
     }
   }
 }

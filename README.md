@@ -130,3 +130,34 @@ direct editing vs mutation
 1. direct editing cannot be tracked, but mutation can.
 2. when store's strict is true, you cannot use direct editing, you can only use mutation
 
+### actions
+
+#### mutation limitation:
+
+when you update store with async calls inside mutations, you will get error:
+
+```
+Error: [vuex] do not mutate vuex store state outside mutation handlers.
+```
+
+we shouldn't put async code inside mutations, we should use actions instead
+
+In store.js, add action:
+
+```
+  actions: {
+    reducePriceAfter3s: context => {
+      setTimeout(function(){
+        context.commit('reducePrice');
+      }, 3000)
+    }
+  }
+```
+
+#### use action:
+
+```
+this.$store.dispatch('reducePriceAfter3s');
+```
+
+mutation tracking adds a record after 3 seconds
