@@ -29,7 +29,7 @@ export default {
 
       // this.$store.commit('reducePrice');
 
-      this.$store.dispatch('reducePriceAfter2s');
+      this.$store.dispatch('reducePriceAfter2s', 4);
     }
   }
 }
