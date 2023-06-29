@@ -12,25 +12,21 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from "vuex";
+
 export default {
   computed: {
     products(){
       return this.$store.state.products;
     },
-    saleProducts(){
-      return this.$store.getters.saleProduct;
-    }
+    ...mapGetters([
+      'saleProduct'
+    ])
   },
   methods: {
-    reducePrice(){
-      // 1. this approach is not tracked like mutations
-      // 2. can not use when store strict is true, which blocks direct editing
-      // this.$store.state.products.forEach(product => product.price -= 1);
-
-      // this.$store.commit('reducePrice');
-
-      this.$store.dispatch('reducePriceAfter2s', 4);
-    }
+    ...mapActions([
+      'reducePriceAfter2s'
+    ])
   }
 }
 </script>

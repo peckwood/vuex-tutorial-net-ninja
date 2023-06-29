@@ -161,3 +161,29 @@ this.$store.dispatch('reducePriceAfter3s');
 ```
 
 mutation tracking adds a record after 3 seconds
+
+### quick way to reference getters and actions
+
+```
+<script>
+import {mapGetters, mapActions} from "vuex";
+
+export default {
+  computed: {
+    products(){
+      return this.$store.state.products;
+    },
+    ...mapGetters([
+      'saleProduct'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'reducePriceAfter2s'
+    ])
+  }
+}
+</script>
+```
+
+> [Youtube Vuex Tutorial from The Net Ninja](https://www.youtube.com/playlist?list=PL4cUxeGkcC9i371QO_Rtkl26MwtiJ30P2)
