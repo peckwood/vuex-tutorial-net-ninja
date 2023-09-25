@@ -1,11 +1,13 @@
-# vuex-playlist
+### initiate project
 
-> A Vue.js project
+```
+vue init webpack-simple vuex-playlist
 
-## Build Setup
+used default in the options
 
-``` bash
-# install dependencies
+cd vuex-playlist
+
+# install dependencies for this project
 npm install
 
 # serve with hot reload at localhost:8080
@@ -15,11 +17,18 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Files
 
+- Product List One and Product List Two are there to show store can be used in multiple components.
+- Product List One shows
+  - how to use getters to access store
+  - how to call mutations to change store
+  - how to call actions to change store(action allow async calls)
+- Product List Two shows how to access store directly
+- Product List Two shows how to access store using getters
+- Product List 3shows how to change store using mutation
 
-
-# vuex notes
+## Vuex Tutorial #3 - Setting up a Central Store
 
 ### add vuex 3 dependency
 
@@ -31,7 +40,7 @@ npm install vuex@3 --save
 
 #### add `src/store/store.js`
 
-```
+```js
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -50,9 +59,13 @@ export const store = new Vuex.Store({
 
 ```
 
+## Vuex Tutorial #4 - Using Computed Properties
+
+import into main.js to use this central store in our application
+
 #### main.js
 
-add
+add the following code:
 
 ```
 ...
@@ -64,7 +77,7 @@ new Vue({
 })
 ```
 
-### access products in components
+### access products in computed property
 
 ```
   computed: {
@@ -73,6 +86,8 @@ new Vue({
     }
   }
 ```
+
+## Vuex Tutorial #5 - Getters
 
 ### use getters
 
@@ -134,11 +149,7 @@ direct editing vs mutation
 
 #### mutation limitation:
 
-when you update store with async calls inside mutations, you will get error:
-
-```
-Error: [vuex] do not mutate vuex store state outside mutation handlers.
-```
+when you mutate store state in a mutation that update with a delay, the mutation happen instantly but change occur later. Which is hard to track.
 
 we shouldn't put async code inside mutations, we should use actions instead
 
@@ -162,7 +173,59 @@ this.$store.dispatch('reducePriceAfter3s');
 
 mutation tracking adds a record after 3 seconds
 
-### quick way to reference getters and actions
+#### How to pass parameter to action:
+
+store.js:
+
+```
+  actions: {
+    reducePriceAfter2s: (context, payload) => {
+      setTimeout(function(){
+        context.commit('reducePrice', payload);
+      }, 3000)
+    }
+  }
+```
+
+
+
+component:
+
+```
+ <button @click="reducePriceAfter2s(1)">Reduce Price Later</button>
+```
+
+```
+  methods: {
+    ...mapActions([
+      'reducePriceAfter2s'
+    ])
+  }
+```
+
+
+
+### Vuex Tutorial #8 - Mapping Actions & Getters
+
+need to install babel if spread syntax is not supported
+
+```
+npm install babel-preset-stage-2 --save-dev
+rerun app
+```
+
+and in .babellrc, add stage-3
+
+```
+{
+  "presets": [
+    ["env", { "modules": false }],
+    "stage-3"
+  ]
+}
+```
+
+
 
 ```
 <script>

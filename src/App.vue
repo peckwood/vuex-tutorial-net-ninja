@@ -11,7 +11,7 @@ import productListTwo from "./components/ProductListTwo.vue";
 export default {
   components:{
     'product-list-one': ProductListOne,
-    'product-list-two': productListTwo
+    'product-list-two': productListTwo,
   },
   name: 'app',
   data () {

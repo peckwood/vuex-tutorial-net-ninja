@@ -4,6 +4,8 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
+  //set to true to allow only changes of state throught mutations
+  //disallow changing directly in component
   strict: true,
   state: {
     products: [
@@ -23,11 +25,18 @@ export const store = new Vuex.Store({
       })
     }
   },
+  // mutations: {
+  //   reducePrice: (state, payload) => {
+  //     state.products.forEach((product) =>
+  //       product.price -= 1
+  //     );
+  //   }
+  // },
   mutations: {
-    reducePrice: (state, payload) => {
-      state.products.forEach((product) =>
-        product.price -= payload
-      )
+    reducePrice: state => {
+      state.products.forEach( product => {
+        product.price -= 1
+      });
     }
   },
   actions: {
